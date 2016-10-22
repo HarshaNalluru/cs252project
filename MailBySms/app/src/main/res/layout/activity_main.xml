@@ -24,6 +24,14 @@
         android:layout_below="@+id/to"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/number"
+        android:hint="Number"
+        android:layout_below="@+id/subject"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
 
     <RelativeLayout

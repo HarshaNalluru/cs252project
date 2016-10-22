@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.harsha.mailbysms.R;
 public class MainActivity extends AppCompatActivity {
-    private EditText to,subject,message;
+    private EditText to,subject,message,number;
     private Button send;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
         to= (EditText)findViewById(R.id.to);
         subject=(EditText)findViewById(R.id.subject);
         message = (EditText)findViewById(R.id.message);
+        number = (EditText)findViewById(R.id.number);
         send= (Button)findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNo = "7755057754";
+                String phoneNo = number.getText().toString();
                 String sms = message.getText().toString()+subject.getText().toString()+to.getText().toString();
 
                 try {
