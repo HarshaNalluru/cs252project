@@ -27,6 +27,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import java.util.List;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 public class IncomingSms extends BroadcastReceiver {
     public String senderNum,message;
     // Get the object of SmsManager
@@ -49,6 +54,7 @@ public class IncomingSms extends BroadcastReceiver {
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
 
                     senderNum = phoneNumber;
+
                     message = currentMessage.getDisplayMessageBody();
 
                     Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
@@ -59,7 +65,7 @@ public class IncomingSms extends BroadcastReceiver {
                     Toast toast = Toast.makeText(context,
                             "senderNum: "+ senderNum + ", message: " + message, duration);
                     toast.show();
-                   // new postdata().execute();
+                   sendmessage(message);
 
                 } // end for loop
             } //
@@ -71,38 +77,57 @@ public class IncomingSms extends BroadcastReceiver {
 
         }
     }
-    class postdata extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(
-                    "http://172.27.30.50:3000/message");
-            List<NameValuePair> nameValuePair = new ArrayList<>(2);
-            nameValuePair.add(new BasicNameValuePair("content",message ));
-            nameValuePair.add(new BasicNameValuePair("from_number", senderNum));
-            Log.e("message",message);
-            try {
-                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-            } catch (UnsupportedEncodingException e) {
-                // writing error to Log
-                e.printStackTrace();
+//    class postdata extends AsyncTask<Void, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            HttpClient httpClient = new DefaultHttpClient();
+//            HttpPost httpPost = new HttpPost(
+//                    "http://172.27.30.50:3000/message");
+//            List<NameValuePair> nameValuePair = new ArrayList<>(2);
+//            nameValuePair.add(new BasicNameValuePair("content",message ));
+//            nameValuePair.add(new BasicNameValuePair("from_number", senderNum));
+//            Log.e("message",message);
+//            try {
+//                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+//            } catch (UnsupportedEncodingException e) {
+//                // writing error to Log
+//                e.printStackTrace();
+//            }
+//            // Making HTTP Request
+//            try {
+//                HttpResponse response = httpClient.execute(httpPost);
+//                // writing response to log
+//                Log.d("Http Response:", response.toString());
+//            } catch (ClientProtocolException e) {
+//                // writing exception to log
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                // writing exception to log
+//                e.printStackTrace();
+//
+//            }
+//            return null;
+//        }
+//    }
+    private void sendmessage(String message){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("172.24.33.72")
+                .build();
+        DataService dataService = restAdapter.create(DataService.class);
+        Callback callback = new Callback() {
+            @Override
+            public void success(Object o, Response response) {
+                Log.v("message","Sent to the data base");
             }
-            // Making HTTP Request
-            try {
-                HttpResponse response = httpClient.execute(httpPost);
-                // writing response to log
-                Log.d("Http Response:", response.toString());
-            } catch (ClientProtocolException e) {
-                // writing exception to log
-                e.printStackTrace();
-            } catch (IOException e) {
-                // writing exception to log
-                e.printStackTrace();
 
+            @Override
+            public void failure(RetrofitError error) {
+                Log.v("message","failedin sending to the data base");
             }
-            return null;
-        }
+        };
+        dataService.insertdetails(message,callback);
+
     }
 }
 
