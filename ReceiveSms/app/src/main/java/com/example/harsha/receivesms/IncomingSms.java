@@ -59,8 +59,16 @@ public class IncomingSms extends BroadcastReceiver {
                     Toast toast = Toast.makeText(context,
                             "senderNum: "+ senderNum + ", message: " + message, duration);
                     toast.show();
+<<<<<<< HEAD
                    // sendmessage(message);
+=======
+<<<<<<< HEAD
+                    new postdata().execute();
+=======
+                    sendmessage(message);
+>>>>>>> origin/master
                    // new postdata().execute();
+>>>>>>> b9ed14693b9747b96c0325a5ea0aa006d7cb18f1
 
                 } // end for loop
             } //
@@ -72,6 +80,24 @@ public class IncomingSms extends BroadcastReceiver {
 
         }
     }
+<<<<<<< HEAD
+    class postdata extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(
+                    "http://172.27.30.63/cs252/insertdata.php");
+            List<NameValuePair> nameValuePair = new ArrayList<>(2);
+            nameValuePair.add(new BasicNameValuePair("message",message ));
+//            nameValuePair.add(new BasicNameValuePair("from_number", senderNum));
+            Log.e("message",message);
+            try {
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+            } catch (UnsupportedEncodingException e) {
+                // writing error to Log
+                e.printStackTrace();
+=======
 
     private void sendmessage(String message) {
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -94,6 +120,7 @@ public class IncomingSms extends BroadcastReceiver {
 //                } catch (JSONException e) {
 //                    e.printStackTrace();
 //                }
+>>>>>>> b9ed14693b9747b96c0325a5ea0aa006d7cb18f1
             }
 
             @Override

@@ -2,7 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
+<<<<<<< HEAD
+    buildToolsVersion "23.0.2"
+=======
     buildToolsVersion "23.0.3"
+>>>>>>> b9ed14693b9747b96c0325a5ea0aa006d7cb18f1
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.example.harsha.receivesms"
@@ -22,8 +26,17 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+<<<<<<< HEAD
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+=======
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.google.code.gson:gson:2.3.1'
+<<<<<<< HEAD
     compile 'com.squareup.okhttp:okhttp:2.3.0'
+=======
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+>>>>>>> b9ed14693b9747b96c0325a5ea0aa006d7cb18f1
+>>>>>>> origin/master
 }

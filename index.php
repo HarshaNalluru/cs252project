@@ -35,7 +35,15 @@ include_once 'dbconnect.php';
         </div>
     </div>
 </nav>
-
+<div class="container text-center">
+    <h1><?php 
+        if($_SESSION['usr_name']){
+            echo "Hello, ";
+        }
+        echo $_SESSION['usr_name']; 
+        ?> 
+    </h1>
+</div>
 <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 
 <script src="js/bootstrap.min.js"></script>
