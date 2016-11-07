@@ -14,18 +14,18 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import java.util.List;
+
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class IncomingSms extends BroadcastReceiver {
     public String senderNum,message;
@@ -59,7 +59,12 @@ public class IncomingSms extends BroadcastReceiver {
                     Toast toast = Toast.makeText(context,
                             "senderNum: "+ senderNum + ", message: " + message, duration);
                     toast.show();
+<<<<<<< HEAD
                     new postdata().execute();
+=======
+                    sendmessage(message);
+                   // new postdata().execute();
+>>>>>>> b9ed14693b9747b96c0325a5ea0aa006d7cb18f1
 
                 } // end for loop
             } //
@@ -71,6 +76,7 @@ public class IncomingSms extends BroadcastReceiver {
 
         }
     }
+<<<<<<< HEAD
     class postdata extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -87,22 +93,71 @@ public class IncomingSms extends BroadcastReceiver {
             } catch (UnsupportedEncodingException e) {
                 // writing error to Log
                 e.printStackTrace();
-            }
-            // Making HTTP Request
-            try {
-                HttpResponse response = httpClient.execute(httpPost);
-                // writing response to log
-                Log.d("Http Response:", response.toString());
-            } catch (ClientProtocolException e) {
-                // writing exception to log
-                e.printStackTrace();
-            } catch (IOException e) {
-                // writing exception to log
-                e.printStackTrace();
+=======
 
+    private void sendmessage(String message) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://www.interiit.com/php")
+                .build();
+        DataService dataService =restAdapter.create(DataService.class);
+
+        Callback callback = new Callback() {
+
+            @Override
+            public void success(Object o, Response response) {
+                APIResponse ticketids = (APIResponse)o;
+//                try {
+//                    JSONArray jsonArray =new JSONArray(ticketids.getData());
+//                    Type type = new TypeToken<List<StandingsDTO>>(){}.getType();
+//                    standingsDTOList = GsonFactory.getISOFormatInstance().fromJson(jsonArray.toString(), type);
+//                    adapter = new StandingsAdapter(Points.this,standingsDTOList);
+//                    recyclerView.setAdapter(adapter);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+>>>>>>> b9ed14693b9747b96c0325a5ea0aa006d7cb18f1
             }
-            return null;
-        }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                //standingsDTOList= new ArrayList<>();
+            }
+        };
+            dataService.senddata("abhajjalkalak", callback);
     }
+//    class postdata extends AsyncTask<Void, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            HttpClient httpClient = new DefaultHttpClient();
+//            HttpPost httpPost = new HttpPost(
+//                    "http://172.27.30.50:3000/message");
+//            List<NameValuePair> nameValuePair = new ArrayList<>(2);
+//            nameValuePair.add(new BasicNameValuePair("content",message ));
+//            nameValuePair.add(new BasicNameValuePair("from_number", senderNum));
+//            Log.e("message",message);
+//            try {
+//                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+//            } catch (UnsupportedEncodingException e) {
+//                // writing error to Log
+//                e.printStackTrace();
+//            }
+//            // Making HTTP Request
+//            try {
+//                HttpResponse response = httpClient.execute(httpPost);
+//                // writing response to log
+//                Log.d("Http Response:", response.toString());
+//            } catch (ClientProtocolException e) {
+//                // writing exception to log
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                // writing exception to log
+//                e.printStackTrace();
+//
+//            }
+//            return null;
+//        }
+//    }
 }
 
