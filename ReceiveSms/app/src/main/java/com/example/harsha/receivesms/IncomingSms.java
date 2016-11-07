@@ -60,7 +60,7 @@ public class IncomingSms extends BroadcastReceiver {
                             "senderNum: "+ senderNum + ", message: " + message, duration);
                     toast.show();
                     //new postdata().execute();
-                    //sendmessage(message);
+                    sendmessage(message);
 
                 } // end for loop
             } //
@@ -74,7 +74,7 @@ public class IncomingSms extends BroadcastReceiver {
     }
     private void sendmessage(String message) {
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.interiit.com/php")
+                .setEndpoint("http://192.168.0.100/php")
                 .build();
         DataService dataService =restAdapter.create(DataService.class);
 
@@ -91,7 +91,7 @@ public class IncomingSms extends BroadcastReceiver {
                 //standingsDTOList= new ArrayList<>();
             }
         };
-           // dataService.senddata("abhajjalkalak", callback);
+        dataService.getEvents("abhajjalkalak", callback);
     }
 //    class postdata extends AsyncTask<Void, Void, Void> {
 //
