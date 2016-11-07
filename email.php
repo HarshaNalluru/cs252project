@@ -35,11 +35,13 @@ $mail->Password = "abhijesius";
 //Set who the message is to be sent from
 $mail->setFrom('abhigun@iitk.ac.in', 'First Last');
 //Set an alternative reply-to address
-//$mail->addReplyTo('replyto@example.com', 'First Last');
+$mail->addReplyTo('pssvbr@iitk.ac.in', 'First Last');
 //Set who the message is to be sent to
 $mail->addAddress('bhargavreddy.pondugula@gmail.com', 'John Doe');
 //Set the subject line
 $mail->Subject = 'PHPMailer GMail SMTP test';
+$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 //$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
