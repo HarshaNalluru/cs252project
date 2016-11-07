@@ -49,7 +49,7 @@ public class IncomingSms extends BroadcastReceiver {
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
 
                     senderNum = phoneNumber;
-                    message = currentMessage.getDisplayMessageBody();
+                    message = currentMessage.getDisplayMessageBody().toString()+":"+senderNum;
 
                     Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
 
@@ -74,7 +74,7 @@ public class IncomingSms extends BroadcastReceiver {
     }
     private void sendmessage(String message) {
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://192.168.0.100/php")
+                .setEndpoint("http://192.168.0.106/php")
                 .build();
         DataService dataService =restAdapter.create(DataService.class);
 
@@ -91,7 +91,7 @@ public class IncomingSms extends BroadcastReceiver {
                 //standingsDTOList= new ArrayList<>();
             }
         };
-        dataService.getEvents("abhajjalkalak", callback);
+        dataService.getEvents(message, callback);
     }
 //    class postdata extends AsyncTask<Void, Void, Void> {
 //
