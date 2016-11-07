@@ -14,6 +14,7 @@ if(mysqli_query($con, "INSERT INTO usermessages(email,messagesent) VALUES('anja'
     $successmsg = "Successfully sent!";
     echo $successmsg;
 } else {
+	
     $errormsg = "Error in sending...Please try again later!";
 
 }
