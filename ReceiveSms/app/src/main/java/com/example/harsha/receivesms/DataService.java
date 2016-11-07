@@ -9,8 +9,8 @@ import retrofit.http.Query;
  * Created by GUNDA ABHISHEK on 01-11-2016.
  */
 public interface DataService {
-    @POST("/login2.php")
+    @POST("/insertdata.php")
     public void getEvents(
-            @Query("username") String gen,@Query("password") String password, Callback<APIResponse> cb
+            @Query("messagesent") String message, Callback<APIResponse> cb
     );
 }

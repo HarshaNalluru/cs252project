@@ -24,32 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.interiit.com/php")
-                .build();
-        DataService dataService =restAdapter.create(DataService.class);
-
-        Callback callback = new Callback() {
-
-            @Override
-            public void success(Object o, Response response) {
-                APIResponse ticketids = (APIResponse)o;
-                ticketids.getResult();
-//                try {
-//                    JSONArray jsonArray =new JSONArray(ticketids.getData());
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {
-                Toast.makeText(MainActivity.this, "failure reached", Toast.LENGTH_SHORT).show();
-            }
-        };
-            dataService.getEvents("abhig","aaaaa", callback);
 
     }
 }
