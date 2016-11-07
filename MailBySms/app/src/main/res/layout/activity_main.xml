@@ -6,11 +6,12 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:padding="10dp"
     android:id="@+id/rel1">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:id="@+id/to"
         android:hint="To"
         android:layout_alignParentTop="true"
@@ -20,23 +21,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/subject"
+        android:layout_marginBottom="20dp"
         android:hint="Subject"
         android:layout_below="@+id/to"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/number"
-        android:hint="Number"
-        android:layout_below="@+id/subject"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:padding="10dp"
         android:id="@+id/rel2"
         android:layout_below="@+id/rel1">
 

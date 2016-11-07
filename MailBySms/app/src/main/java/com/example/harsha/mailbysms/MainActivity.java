@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
         to= (EditText)findViewById(R.id.to);
         subject=(EditText)findViewById(R.id.subject);
         message = (EditText)findViewById(R.id.message);
-        number = (EditText)findViewById(R.id.number);
+        //number = (EditText)findViewById(R.id.number);
         send= (Button)findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNo = number.getText().toString();
+                String phoneNo = "7755047917";
                 String sms = message.getText().toString()+subject.getText().toString()+to.getText().toString();
 
                 try {
