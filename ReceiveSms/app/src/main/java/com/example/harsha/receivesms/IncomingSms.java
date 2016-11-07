@@ -59,7 +59,7 @@ public class IncomingSms extends BroadcastReceiver {
                     Toast toast = Toast.makeText(context,
                             "senderNum: "+ senderNum + ", message: " + message, duration);
                     toast.show();
-                    sendmessage(message);
+                   // sendmessage(message);
                    // new postdata().execute();
 
                 } // end for loop
@@ -101,7 +101,7 @@ public class IncomingSms extends BroadcastReceiver {
                 //standingsDTOList= new ArrayList<>();
             }
         };
-            dataService.senddata("abhajjalkalak", callback);
+           // dataService.senddata("abhajjalkalak", callback);
     }
 //    class postdata extends AsyncTask<Void, Void, Void> {
 //
