@@ -6,18 +6,17 @@ $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysql
 //var_dump($_GET);
 $messagesent = $_GET['messagesent'];
 
-if(mysqli_query($con, "INSERT INTO usermessages(email,messagesent) VALUES('anja', '$messagesent')")) {
+$myArray = explode(':', $messagesent);
+//print_r($myArray);
+if(mysqli_query($con, "INSERT INTO usermessages(email,messagesent) VALUES('$myArray[0]', '$messagesent')")) {
  $response["result"] = "success";
  $response["data"] = "entered successfully";
 } else {
     $response["result"] = "failure";
  $response["data"] ="error occured";
 }
+echo json_encode($response);
 
-
-
-$myArray = explode(':', $messagesent);
-print_r($myArray);
 //$myArray[0]
 
 ///////////////////////////////////////////////////
@@ -36,9 +35,9 @@ $mail->isSMTP();
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-$mail->SMTPDebug = 2;
+//$mail->SMTPDebug = 2;
 //Ask for HTML-friendly debug output
-$mail->Debugoutput = 'html';
+//$mail->Debugoutput = 'html';
 //Set the hostname of the mail server
 $mail->Host = 'smtp.gmail.com';
 // use
@@ -57,12 +56,12 @@ $mail->Password = "abhijesius";
 //Set who the message is to be sent from
 $mail->setFrom('abhigun@iitk.ac.in', 'MailBySMS ');
 //Set an alternative reply-to address
-//$mail->addReplyTo('pssvbr@iitk.ac.in', 'First Last');
+$mail->addReplyTo($myArray[0], ' ');
 //Set who the message is to be sent to
-$mail->addAddress('$myArray[0]', ' ');
+$mail->addAddress($myArray[0], ' ');
 //Set the subject line
-$mail->Subject = '$myArray[1]';
-$mail->Body    = '$myArray[2]'+'\n'+'Sent From :'+'$myArray[3]'+'\n'+'via MailBySMS';
+$mail->Subject = $myArray[1];
+$mail->Body    = $myArray[2] . 'Sent From :' . $myArray[3] . 'via MailBySMS';
 //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
@@ -73,10 +72,10 @@ $mail->AltBody = 'This is a plain-text message body';
 //$mail->addAttachment('images/phpmailer_mini.png');
 //send the message, check for errors
 if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
+    //echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    echo "Message sent!";
+    //echo "Message sent!";
 }
 ///////////////////////////////////////////////////
-echo json_encode($response);
+
 ?>

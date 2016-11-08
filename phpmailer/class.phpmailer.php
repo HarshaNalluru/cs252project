@@ -342,7 +342,7 @@ class PHPMailer
      * @var string|callable
      * @see SMTP::$Debugoutput
      */
-    public $Debugoutput = 'echo';
+    public $Debugoutput = 'html';
 
     /**
      * Whether to keep SMTP connection open after each message.

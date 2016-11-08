@@ -124,7 +124,7 @@ class SMTP
      * </code>
      * @var string|callable
      */
-    public $Debugoutput = 'echo';
+    public $Debugoutput = 'html';
 
     /**
      * Whether to use VERP.

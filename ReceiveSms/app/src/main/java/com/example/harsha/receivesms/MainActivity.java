@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,11 +39,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("ip",editText.getText().toString());
+                editor.putString("ip", editText.getText().toString());
                 editor.commit();
+               // String ip = sharedPreferences.getString("ip", "");
+                //sendmessage(ip, "apkr09@gmail.com:subject3:body4:9657782929");
             }
         });
 
 
+
+    }
+    private void sendmessage(String ip,String message) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(ip)
+                .build();
+        DataService dataService =restAdapter.create(DataService.class);
+
+        Callback callback = new Callback() {
+
+            @Override
+            public void success(Object o, Response response) {
+                APIResponse ticketids = (APIResponse)o;
+                ticketids.getResult();
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                Log.v("failure","fail");
+            }
+        };
+        dataService.getEvents(message, callback);
     }
 }
