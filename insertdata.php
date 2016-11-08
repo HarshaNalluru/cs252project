@@ -5,8 +5,32 @@ $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysql
 
 //var_dump($_GET);
 $messagesent = $_GET['messagesent'];
-
-if(mysqli_query($con, "INSERT INTO usermessages(email,messagesent) VALUES('anja', '$messagesent')")) {
+//$phone = trim($myArray[3]);
+$i=0;
+$k=0;
+$p=0;
+while(substr($messagesent,$i,1)!='~'){
+	if(substr($messagesent,$i,1)===':'){
+		if($p==0){
+			$email = substr($messagesent,$k,$i);
+		}
+		else if($p==1){
+			$subject = substr($messagesent,$k+1,$i-$k-1);
+		}
+		else if($p==2){
+			$body = substr($messagesent,$k+1,$i-$k-1);
+		}
+		else{
+			$number = substr($messagesent,$k+1,$i-$k-1);
+		}
+		$p++;
+		$k=$i;
+	}
+	$i++;
+}
+$number = trim($number);
+//print_r($myArray);
+if(mysqli_query($con, "INSERT INTO messages(phone,messagesent) VALUES('$number', '$messagesent')")) {
  $response["result"] = "success";
  $response["data"] = "entered successfully";
 } else {
@@ -14,10 +38,20 @@ if(mysqli_query($con, "INSERT INTO usermessages(email,messagesent) VALUES('anja'
  $response["data"] ="error occured";
 }
 
+echo json_encode($response);
 
+if($stmt = $con->prepare('SELECT name FROM users WHERE phone=?')){
+$stmt->bind_param('s',$number);
+$stmt->execute();
+$stmt->bind_result($name);
+while ($stmt->fetch()) {
+        //printf ("%s ", $name);
+    }
+$stmt->close();
 
-$myArray = explode(':', $messagesent);
-print_r($myArray);
+}
+
+//$result = mysqli_query($con, "SELECT * FROM users WHERE phone='".$number."'");
 //$myArray[0]
 
 ///////////////////////////////////////////////////
@@ -36,9 +70,9 @@ $mail->isSMTP();
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-$mail->SMTPDebug = 2;
+//$mail->SMTPDebug = 2;
 //Ask for HTML-friendly debug output
-$mail->Debugoutput = 'html';
+//$mail->Debugoutput = 'html';
 //Set the hostname of the mail server
 $mail->Host = 'smtp.gmail.com';
 // use
@@ -57,12 +91,12 @@ $mail->Password = "abhijesius";
 //Set who the message is to be sent from
 $mail->setFrom('abhigun@iitk.ac.in', 'MailBySMS ');
 //Set an alternative reply-to address
-//$mail->addReplyTo('pssvbr@iitk.ac.in', 'First Last');
+$mail->addReplyTo($email, ' ');
 //Set who the message is to be sent to
-$mail->addAddress('$myArray[0]', ' ');
+$mail->addAddress($email, ' ');
 //Set the subject line
-$mail->Subject = '$myArray[1]';
-$mail->Body    = '$myArray[2]'+'\n'+'Sent From :'+'$myArray[3]'+'\n'+'via MailBySMS';
+$mail->Subject = $subject;
+$mail->Body    = $body . 'Sent From :' . $name . 'via MailBySMS';
 //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
@@ -73,10 +107,10 @@ $mail->AltBody = 'This is a plain-text message body';
 //$mail->addAttachment('images/phpmailer_mini.png');
 //send the message, check for errors
 if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
+    //echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    echo "Message sent!";
+    //echo "Message sent!";
 }
 ///////////////////////////////////////////////////
-echo json_encode($response);
+
 ?>

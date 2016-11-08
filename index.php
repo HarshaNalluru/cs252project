@@ -37,10 +37,26 @@ include_once 'dbconnect.php';
 </nav>
 <div class="container text-center">
     <h1><?php 
+		
         if($_SESSION['usr_name']){
             echo "Hello, ";
+			echo $_SESSION['usr_name']; 
+			if($stmt = $con->prepare('SELECT messagesent FROM messages WHERE phone=?')){
+			$stmt->bind_param('s',$_SESSION['usr_phone']);
+			$stmt->execute();
+			$stmt->bind_result($messagesent);
+			while ($stmt->fetch()) {
+				printf ("%s ", $messagesent);
+			}
+			$stmt->close();
+
+			}
+
         }
-        echo $_SESSION['usr_name']; 
+		else{
+			header("Location: login.php");
+		}
+        
         ?> 
     </h1>
 </div>

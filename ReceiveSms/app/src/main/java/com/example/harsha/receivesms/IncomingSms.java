@@ -38,7 +38,7 @@ public class IncomingSms extends BroadcastReceiver {
         // Retrieves a map of extended data from the intent.
         final Bundle bundle = intent.getExtras();
         SharedPreferences sharedPreferences = context.getSharedPreferences("ipaddress", Context.MODE_PRIVATE);
-        String ip = sharedPreferences.getString("ip", "");
+        String ip = "http://"+sharedPreferences.getString("ip", "")+"/cs252project";
         try {
 
             if (bundle != null) {

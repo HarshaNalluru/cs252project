@@ -11,7 +11,7 @@
         android:id="@+id/ipaddress"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:hint="http://192.168.0.106/php"
+        android:hint="192.168.0.106"
         />
     <Button
         android:layout_width="match_parent"
