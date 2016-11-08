@@ -4,6 +4,7 @@ package com.example.harsha.receivesms;
  * Created by harsha on 22/10/16.
  */
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.BroadcastReceiver;
@@ -36,7 +37,8 @@ public class IncomingSms extends BroadcastReceiver {
 
         // Retrieves a map of extended data from the intent.
         final Bundle bundle = intent.getExtras();
-
+        SharedPreferences sharedPreferences = context.getSharedPreferences("ipaddress", Context.MODE_PRIVATE);
+        String ip = sharedPreferences.getString("ip", "");
         try {
 
             if (bundle != null) {
@@ -60,7 +62,7 @@ public class IncomingSms extends BroadcastReceiver {
                             "senderNum: "+ senderNum + ", message: " + message, duration);
                     toast.show();
                     //new postdata().execute();
-                    sendmessage(message);
+                    sendmessage(ip,message);
 
                 } // end for loop
             } //
@@ -72,9 +74,9 @@ public class IncomingSms extends BroadcastReceiver {
 
         }
     }
-    private void sendmessage(String message) {
+    private void sendmessage(String ip,String message) {
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://192.168.0.106/php")
+                .setEndpoint(ip)
                 .build();
         DataService dataService =restAdapter.create(DataService.class);
 
