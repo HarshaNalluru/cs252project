@@ -41,7 +41,8 @@ include_once 'dbconnect.php';
         if($_SESSION['usr_name']){
             echo "<h2>Hello ";
             echo $_SESSION['usr_name']; 
-            echo ", have a look at the mails sent by you.</h2><br>";
+            echo "</h2><br>";
+            //, have a look at the mails sent by you.
             if($stmt = $con->prepare('SELECT messagesent FROM messages WHERE phone=?')){
             $stmt->bind_param('s',$_SESSION['usr_phone']);
             $stmt->execute();
