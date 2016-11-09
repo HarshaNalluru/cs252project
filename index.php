@@ -39,7 +39,6 @@ include_once 'dbconnect.php';
     <h1><?php 
         
         if($_SESSION['usr_name']){
-<<<<<<< HEAD
             echo "<h2>Hello ";
             echo $_SESSION['usr_name']; 
             echo ", have a look at the mails sent by you.</h2><br>";
@@ -102,55 +101,13 @@ include_once 'dbconnect.php';
                 echo '<br><h4><i><b>Sent From </b>'.$number;
                 echo '<br> via <b>MailBySMS</b></i></h4></div>';
                 echo '
-=======
-            echo "<h1>Hello, ";
-			echo $_SESSION['usr_name']; 
-            echo "</h1>";
-			if($stmt = $con->prepare('SELECT messagesent FROM messages WHERE phone=?')){
-			$stmt->bind_param('s',$_SESSION['usr_phone']);
-			$stmt->execute();
-			$stmt->bind_result($messagesent);
-            $i=1;
-            echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-			while ($stmt->fetch()) {
-				//printf ("%s ", $messagesent);
-                echo '<div class="panel panel-default">';
-                    echo '<div class="panel-heading" role="tab" id="heading-';
-                    echo $i; 
-                    echo '">';
-                    echo   '<h2 class="panel-title">';
-                    echo     '<a data-toggle="collapse" data-parent="#accordion" href="#collapse-';
-                    echo $i;
-                    echo '" aria-expanded="true" aria-controls="collapseOne">';
-                    echo "string";
-                    echo '    </a>
-                      </h2>
-                    </div>';
-                    echo '<div id="collapse-';
-                    echo $i;
-                    echo '" class="panel-collapse collapse';
-                    if ($i==1) { echo 'in'; } 
-                    echo'" role="tabpanel" aria-labelledby="heading-';
-                    echo $i; 
-                    echo '">
-                      <div class="panel-body">';
-                    printf ("%s \n", $messagesent);
-
-                    echo '
->>>>>>> 8a2387df3784700f156bf9bb2194fd7a751df78b
                       </div>
                     </div>
                 </div>';
                 $i++;
-<<<<<<< HEAD
             }
             echo '</div>';
             $stmt->close();
-=======
-			}
-            echo '</div>';
-			$stmt->close();
->>>>>>> 8a2387df3784700f156bf9bb2194fd7a751df78b
 
             }
 
