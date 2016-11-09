@@ -19,7 +19,7 @@ if (isset($_POST['signup'])) {
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
 	
 	if(substr($phone,0,3)!= '+91'){
-		$phone = '91'.$phone;
+		$phone = '+91'.$phone;
 	}
     //name can contain only alpha characters and space
     if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
