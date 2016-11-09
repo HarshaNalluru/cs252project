@@ -16,12 +16,17 @@ if (isset($_POST['signup'])) {
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $phone = mysqli_real_escape_string($con, $_POST['phone']);
+
     $password = bin2hex(random_bytes(5));
     $cpassword = $password;
     
     if(substr($phone,0,3)!= '+91'){
         $phone = '+91'.$phone;
     }
+
+	if(substr($phone,0,3)!= '+91'){
+		$phone = '+91'.$phone;
+	}
     //name can contain only alpha characters and space
     if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
         $error = true;
