@@ -85,11 +85,11 @@ $mail->SMTPSecure = 'tls';
 //Whether to use SMTP authentication
 $mail->SMTPAuth = true;
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "abhishek128959@gmail.com";
+$mail->Username = "mailbysms.cs252@gmail.com";
 //Password to use for SMTP authentication
-$mail->Password = "abhijesius";
+$mail->Password = "257408468";
 //Set who the message is to be sent from
-$mail->setFrom('abhigun@iitk.ac.in', 'MailBySMS ');
+$mail->setFrom('mailbysms.cs252@gmail.com', 'MailBySMS ');
 //Set an alternative reply-to address
 $mail->addReplyTo($email, ' ');
 //Set who the message is to be sent to
