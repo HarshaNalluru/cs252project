@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <RelativeLayout
@@ -14,7 +15,6 @@
         android:id="@+id/to"
         android:hint="To"
         android:layout_marginBottom="20dp"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -23,41 +23,40 @@
         android:id="@+id/subject"
         android:hint="Subject"
         android:layout_marginBottom="20dp"
-
         android:layout_below="@+id/to"
-        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true" />
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Message"
+        android:layout_below="@+id/subject"
+        android:id="@+id/message" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:id="@+id/send"
+        android:layout_below="@id/message"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:padding="10dp"
-        android:id="@+id/rel2"
-        android:layout_below="@+id/rel1">
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_account_check_white_24dp"
+        app:layout_anchor="@id/main"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:hint="Message"
-            android:id="@+id/message"
-             />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/rel3"
-        android:layout_below="@id/rel2">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/send"
-            android:textColor="#FFFFFF"
-            android:text="Send"
-            android:background="@color/colorPrimary"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
-</RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
