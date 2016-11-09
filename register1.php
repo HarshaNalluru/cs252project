@@ -18,10 +18,10 @@ if (isset($_POST['signup'])) {
     $phone = mysqli_real_escape_string($con, $_POST['phone']);
     $password = bin2hex(random_bytes(5));
     $cpassword = $password;
-    
-    if(substr($phone,0,3)!= '+91'){
-        $phone = '+91'.$phone;
-    }
+	
+	if(substr($phone,0,3)!= '+91'){
+		$phone = '+91'.$phone;
+	}
     //name can contain only alpha characters and space
     if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
         $error = true;
@@ -39,7 +39,7 @@ if (isset($_POST['signup'])) {
         $error = true;
         $cpassword_error = "Password and Confirm Password doesn't match";
     }
-    $pass = md5($password);
+	$pass = md5($password);
     if (!$error) {
         if(mysqli_query($con, "INSERT INTO users(name,email,phone,password) VALUES('$name', '$email','$phone', '$pass')")) {
             $successmsg = "Successfully Registered! <a href='login.php'>Click here to Login</a>";

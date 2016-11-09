@@ -37,19 +37,19 @@ include_once 'dbconnect.php';
 </nav>
 <div class="container">
     <h1><?php 
-        
+		
         if($_SESSION['usr_name']){
-            echo "<h2>Hello ";
-            echo $_SESSION['usr_name']; 
-            echo ", have a look at the mails sent by you.</h2><br>";
-            if($stmt = $con->prepare('SELECT messagesent FROM messages WHERE phone=?')){
-            $stmt->bind_param('s',$_SESSION['usr_phone']);
-            $stmt->execute();
-            $stmt->bind_result($messagesent);
+            echo "<h2 class="text-center">Hello ";
+			echo $_SESSION['usr_name']; 
+            echo ", have a look at the mails sent by you.</h2>";
+			if($stmt = $con->prepare('SELECT messagesent FROM messages WHERE phone=?')){
+			$stmt->bind_param('s',$_SESSION['usr_phone']);
+			$stmt->execute();
+			$stmt->bind_result($messagesent);
             $i=1;
             echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-            while ($stmt->fetch()) {
-                //printf ("%s ", $messagesent);
+			while ($stmt->fetch()) {
+				//printf ("%s ", $messagesent);
                 //----------------------------------------
                 $j=0;
                 $k=0;
@@ -83,8 +83,8 @@ include_once 'dbconnect.php';
                 echo     '<a data-toggle="collapse" data-parent="#accordion" href="#collapse-';
                 echo $i;
                 echo '" aria-expanded="true" aria-controls="collapseOne">';
-                echo '<h4><div class="col-md-5"><i style="text-align:left"><b>To </b>'.$email;
-                echo '</i></div><div class="col-md-7"><i ><b>Subject </b>'.$subject.'</i></div><br></h4>';
+                echo '<h3><i class="align-left"><b>To </b>'.$email;
+                echo '</i><i class="text-center">$subject</i></h3>';
                 echo '    </a>
                   </h2>
                 </div>';
@@ -96,25 +96,25 @@ include_once 'dbconnect.php';
                 echo $i; 
                 echo '">
                   <div class="panel-body">';
-                echo '<div class="container"><h3><i><b>Body </b><br>'.$body;
+                echo '<h3><i class="align-left"><b>To </b>'.$body;
                 echo '</i></h3>';
-                echo '<br><h4><i><b>Sent From </b>'.$number;
-                echo '<br> via <b>MailBySMS</b></i></h4></div>';
+                echo '<br><h3><i><b>Sent From </b>'.$number;
+                echo 'via MailBySMS</i></h3>';
                 echo '
                       </div>
                     </div>
                 </div>';
                 $i++;
-            }
+			}
             echo '</div>';
-            $stmt->close();
+			$stmt->close();
 
-            }
+			}
 
         }
-        else{
-            header("Location: login.php");
-        }
+		else{
+			header("Location: login.php");
+		}
         
         ?> 
  
