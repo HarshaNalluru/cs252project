@@ -23,6 +23,7 @@ if (isset($_POST['confirm'])) {
         $cpassword_error = "Password and Confirm Password doesn't match";
     }
     $pass = md5($password);
+    $currentpassword=md5($currentpassword);
     if (!$error) {
         if(mysqli_query($con, "UPDATE users SET password='$pass' WHERE password ='$currentpassword'")) {
             $successmsg = "Successfully Updated! <a href='index.php'>Click here to check mails</a>";
