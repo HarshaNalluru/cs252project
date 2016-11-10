@@ -42,7 +42,7 @@ if (isset($_POST['signup'])) {
     $pass = md5($password);
     if (!$error) {
         if(mysqli_query($con, "INSERT INTO users(name,email,phone,password) VALUES('$name', '$email','$phone', '$pass')")) {
-            $successmsg = "Successfully Registered! <a href='login.php'>Click here to Login</a>";
+            $successmsg = "Successfully Registered,Temporary password is sent to your mail-id! <a href='login.php'>Click here to Login</a>";
         } else {
             $errormsg = "Error in registering...Please try again later!";
         }
@@ -89,13 +89,13 @@ $mail->addAddress($email, ' ');
 //Set the subject line
 $mail->Subject = "verification password secure login";
 //var_dump($password);
-$mail->Body    = 'Password  :' . $password . 'via MailBySMS';
+$mail->Body    = ' Password  :' . $password . ' via MailBySMS';
 //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 //$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 //Replace the plain text body with one created manually
-$mail->AltBody = 'Password: ' . $password . '        via MailBySMS team';
+$mail->AltBody = ' Password: ' . $password . '        via MailBySMS team';
 //Attach an image file
 //$mail->addAttachment('images/phpmailer_mini.png');
 //send the message, check for errors

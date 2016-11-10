@@ -96,13 +96,13 @@ $mail->addReplyTo($email, ' ');
 $mail->addAddress($email, ' ');
 //Set the subject line
 $mail->Subject = $subject;
-$mail->Body    = $body . 'Sent From :' . $name . 'via MailBySMS';
+$mail->Body    = $body . ' Sent From :' . $name . ' via MailBySMS';
 //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 //$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 //Replace the plain text body with one created manually
-$mail->AltBody = 'This is a plain-text message body';
+$mail->AltBody = $body . ' Sent From :' . $name . ' via MailBySMS';
 //Attach an image file
 //$mail->addAttachment('images/phpmailer_mini.png');
 //send the message, check for errors

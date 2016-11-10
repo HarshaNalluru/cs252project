@@ -9,9 +9,11 @@ $error = false;
 //check if form is submitted
     //var_dump(bin2hex($password));
 if (isset($_POST['confirm'])) {
+    $currentpassword = mysqli_real_escape_string($con, $_POST['currentpassword']);
     $password =  mysqli_real_escape_string($con, $_POST['password']);
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
     $id = $_SESSION['usr_id'];
+
     if(strlen($password) < 6) {
         $error = true;
         $password_error = "Password must be minimum of 6 characters";
@@ -22,10 +24,10 @@ if (isset($_POST['confirm'])) {
     }
     $pass = md5($password);
     if (!$error) {
-        if(mysqli_query($con, "UPDATE users SET password='$pass' WHERE id ='$id'")) {
+        if(mysqli_query($con, "UPDATE users SET password='$pass' WHERE password ='$currentpassword'")) {
             $successmsg = "Successfully Updated! <a href='index.php'>Click here to check mails</a>";
         } else {
-            $errormsg = "Error in updating...Please try again later!";
+            $errormsg = "Error in updating...Make sure you enter correct password!";
         }
     }
 }
@@ -77,6 +79,11 @@ if (isset($_POST['confirm'])) {
                 <fieldset>
                     <legend>Change Password</legend>
 
+                    <div class="form-group">
+                        <label for="name">Current Password</label>
+                        <input type="password" name="currentpassword" placeholder="Current Password" required class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label for="name">Password</label>
                         <input type="password" name="password" placeholder="Password" required class="form-control" />
